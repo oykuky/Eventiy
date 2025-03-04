@@ -9,9 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        lightyellow:"#fffa65",
-        neonGreen:"#32ff7e",
-        deepOrange:"#FF8A65"
+        lightyellow: "var(--light-yellow)",
+        neongreen: "var(--neon-green)",
+        deeporange: "var(--deep-orange)"
       },
     },
   },

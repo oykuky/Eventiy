@@ -29,6 +29,7 @@ export type GetEventsResponse = {
       name: string;
       about: string;
       address: string;
+      slug: string;
       city: {
         id: number;
         name: string;
