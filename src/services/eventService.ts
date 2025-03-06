@@ -1,5 +1,6 @@
 import { endpoints } from "@/constants/endpoints";
 import { createService } from "./generic";
+import { EventDetail } from "@/types/events";
 
 export type GetEventsResponse = {
   meta: {
@@ -43,5 +44,28 @@ export type GetEventsResponse = {
 
 export const getEventsService = createService<GetEventsResponse>(
   endpoints.events,
+  { method: "GET" }
+);
+
+//Etkinlik detaylarını getirme servisi
+export const getEventDetailsService = (eventId: number) =>
+  createService<EventDetail>(`${endpoints.eventsDetails}/${eventId}`, { method: "GET" })();
+
+
+//Tür listesini getirme servisi
+export const getFormatListService = createService<{ id: number; name: string }[]>(
+  endpoints.formatLists,
+  { method: "GET" }
+);
+
+//Kategori listesini getirme servisi
+export const getCategoryListService = createService<{ id: number; name: string }[]>(
+  endpoints.categoryLists,
+  { method: "GET" }
+);
+
+//Şehir listesini getirme servisi
+export const getCityListService = createService<{ id: number; name: string }[]>(
+  endpoints.citiesList,
   { method: "GET" }
 );
