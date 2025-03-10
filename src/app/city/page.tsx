@@ -8,7 +8,6 @@ import React from "react";
 function CityPage() {
   const searchParams = useSearchParams();
   const cityId = searchParams.get("cityId");
-  console.log(cityId);
   const { data, isLoading, error } = useEvents(Number(cityId));
 
   if (isLoading)

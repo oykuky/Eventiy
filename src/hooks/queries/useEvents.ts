@@ -2,10 +2,10 @@ import { getCategoryListService, getCityListService, getEventDetailsService, get
 import { useQuery } from "@tanstack/react-query";
 
 //Tüm etkinlikleri getirme
-export function useEvents(cityId?: number) {
+export function useEvents(cityId?: number, categoryId?: number, formatId?:number) {
   return useQuery({
-    queryKey: ["events",cityId],
-    queryFn: () => getEventsService(undefined, cityId),
+    queryKey: ["events",cityId, categoryId, formatId],
+    queryFn: () => getEventsService(undefined, cityId, categoryId, formatId),
     staleTime: 1000 * 60 * 5, // 5 dakika boyunca veriyi cache'de tutar
   });
 }

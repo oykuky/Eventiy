@@ -42,12 +42,7 @@ export type GetEventsResponse = {
   }[];
 };
 
-// export const getEventsService = createService<GetEventsResponse>(
-//   endpoints.events,
-//   { method: "GET" }
-// );
-
-export const getEventsService = async (searchTerm?: string, cityId?: number) => {
+export const getEventsService = async (searchTerm?: string, cityId?: number, categoryId?:number, formatId?:number) => {
   const today = new Date().toISOString().split("T")[0];
   let endpoint = `${endpoints.events}&start=${today}`;
 
@@ -59,8 +54,18 @@ export const getEventsService = async (searchTerm?: string, cityId?: number) => 
     endpoint += `&city_ids=${cityId}`;
   }
 
+  if(categoryId){
+    endpoint += `&category_ids=${categoryId}`;
+  }
+
+  if(formatId){
+    endpoint += `&format_ids=${formatId}`;
+  }
+
   return createService<GetEventsResponse>(endpoint, { method: "GET" })();
+
 };
+
 //Etkinlik detaylarını getirme servisi
 export const getEventDetailsService = (eventId: number) =>
   createService<EventDetail>(`${endpoints.eventsDetails}/${eventId}`, { method: "GET" })();
