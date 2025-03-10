@@ -1,6 +1,6 @@
 
 export const endpoints = {
-    events: "/events?format_ids=&category_ids=&venue_ids=&city_ids=&skip=&take=50" , 
+    events: "/events?take=100" , 
     eventsDetails : "/events",
     formatLists: "/formats",
     categoryLists: "/categories",

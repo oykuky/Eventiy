@@ -42,11 +42,25 @@ export type GetEventsResponse = {
   }[];
 };
 
-export const getEventsService = createService<GetEventsResponse>(
-  endpoints.events,
-  { method: "GET" }
-);
+// export const getEventsService = createService<GetEventsResponse>(
+//   endpoints.events,
+//   { method: "GET" }
+// );
 
+export const getEventsService = async (searchTerm?: string, cityId?: number) => {
+  const today = new Date().toISOString().split("T")[0];
+  let endpoint = `${endpoints.events}&start=${today}`;
+
+  if (searchTerm) {
+    endpoint += `&format_ids=${encodeURIComponent(searchTerm)}`;
+  }
+
+  if (cityId) {
+    endpoint += `&city_ids=${cityId}`;
+  }
+
+  return createService<GetEventsResponse>(endpoint, { method: "GET" })();
+};
 //Etkinlik detaylarını getirme servisi
 export const getEventDetailsService = (eventId: number) =>
   createService<EventDetail>(`${endpoints.eventsDetails}/${eventId}`, { method: "GET" })();

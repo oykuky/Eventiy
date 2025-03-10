@@ -2,10 +2,48 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { AlignJustify } from "lucide-react";
+import { useCities } from "@/hooks/queries/useEvents";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronDownIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+
 
 const Navbar = () => {
+  const DropdownComponent = () => {
+    return (
+      <>
+       <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    Şehir Seçin
+                    <ChevronDownIcon className="-me-1 opacity-60" size={16} aria-hidden="true" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="max-h-60 overflow-y-auto min-w-[--radix-dropdown-menu-trigger-width]">
+                  {cities?.map((city) => (
+                    <DropdownMenuItem key={city.id} onClick={() => handleCityChange(city.id)}>
+                      {city.name}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+      </>
+    )
+  }
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { data: cities } = useCities();
+  const router = useRouter();
+
+  const handleCityChange = (cityId:number) => {
+    router.push(`/city?cityId=${cityId}`);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,8 +60,7 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Ana Sayfa", href: "/" },
-    { name: "Türler", href: "/events/categories" },
-    { name: "İller", href: "/events/cities" },
+    { name: "Türler", href: "/category" },
     { name: "Blog", href: "/blog" },
   ];
 
@@ -56,8 +93,13 @@ const Navbar = () => {
                 {i.name}
               </Link>
             ))}
+            {/* City Dropdown */}
+          <div className="flex items-center space-x-4">
+           <DropdownComponent/>
+          </div>
           </div>
 
+          
           {/* Buttons */}
           <div className="hidden md:flex md:items-center md:space-x-4">
             <Link
@@ -99,6 +141,10 @@ const Navbar = () => {
                 {i.name}
               </Link>
             ))}
+          {/* City Dropdown */}
+          <div className="flex items-center space-x-4">
+          <DropdownComponent/>
+          </div>
             <Link
               href="/login"
               className="mt-4 bg-black text-white hover:bg-emerald-500 transation-all duration-300 ease-in rounded-lg text-primary-600 hover:text-primary-700 px-4 py-2 font-medium"
