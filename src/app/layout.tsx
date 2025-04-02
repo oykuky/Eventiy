@@ -1,30 +1,27 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { QueryProvider } from "@/providers/QueryProvider";
-import { Poppins, Montserrat } from "next/font/google";
-import Navbar from "@/components/Navbar";
+import { Nunito, Poppins, Fredoka } from "next/font/google";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Nunito Font
+const nunito = Nunito({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-nunito",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
+// Poppins Font
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-poppins",
 });
 
-const montserrat = Montserrat({
+// Fredoka Font
+const fredoka = Fredoka({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-montserrat",
+  variable: "--font-fredoka",
 });
 
 export const metadata: Metadata = {
@@ -40,11 +37,10 @@ export default function RootLayout({
   return (
     <html
       lang="tr"
-      className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${montserrat.variable} antialiased`}
+      className={`${nunito.variable} ${poppins.variable} ${fredoka.variable} antialiased`}
     >
-      <body className="font-sans">
+      <body className="font-nunito font-medium">
         <QueryProvider>
-          <Navbar />
           {children}
         </QueryProvider>
       </body>
