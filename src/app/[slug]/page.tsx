@@ -19,8 +19,14 @@ function EventsDetailPage() {
         <Loader className="text-center text-green-700 animate-spin w-12 h-12" />
       </div>
     );
-  if (error) return <p>Hata oluştu!</p>;
 
+    if (error)
+      return (
+        <div className="mt-10 flex items-center justify-center">
+          <p className="text-center">Hata oluştu!</p>
+        </div>
+      );
+  
   return (
     <div className="min-h-screen">
       {eventDetails ? (

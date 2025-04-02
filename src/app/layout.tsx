@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { QueryProvider } from "@/providers/QueryProvider";
-import { Nunito, Poppins, Fredoka } from "next/font/google";
+import { Nunito, Fredoka } from "next/font/google";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 // Nunito Font
 const nunito = Nunito({
@@ -10,12 +12,6 @@ const nunito = Nunito({
   variable: "--font-nunito",
 });
 
-// Poppins Font
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-poppins",
-});
 
 // Fredoka Font
 const fredoka = Fredoka({
@@ -37,11 +33,13 @@ export default function RootLayout({
   return (
     <html
       lang="tr"
-      className={`${nunito.variable} ${poppins.variable} ${fredoka.variable} antialiased`}
+      className={`${nunito.variable} ${fredoka.variable} antialiased`}
     >
-      <body className="font-nunito font-medium">
+      <body className="flex flex-col font-nunito font-medium min-h-screen justify-between">
         <QueryProvider>
+          <Navbar/>
           {children}
+          <Footer/>
         </QueryProvider>
       </body>
     </html>

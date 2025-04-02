@@ -14,8 +14,20 @@ export default function Home() {
         <Loader className="text-center text-green-700 animate-spin w-12 h-12" />
       </div>
     );
-  if (error) return <p>Hata oluştu!</p>;
-  if (!data?.items?.length) return <p>Etkinlik bulunamadı.</p>;
+
+  if (error)
+    return (
+      <div className="mt-10 flex items-center justify-center">
+        <p className="text-center">Hata oluştu!</p>;
+      </div>
+    );
+
+  if (!data?.items?.length)
+    return (
+      <div className="mt-10 flex items-center justify-center">
+        <p className="text-center">Etkinlik bulunamadı.</p>;
+      </div>
+    );
 
   return (
     <div className="flex items-center justify-center flex-col gap-8">
